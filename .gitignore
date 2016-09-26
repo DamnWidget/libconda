@@ -1,0 +1,14 @@
+# Ignore Sublime Text project files
+*.sublime-project
+*.sublime-workspace
+
+# Ignore VIM files
+*~
+
+# Ignore intermediate and library files
+*.o
+*.so
+
+# ignore python byte code files
+*.py[oc]
+_pycache_/
