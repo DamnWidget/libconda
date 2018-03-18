@@ -1,16 +1,18 @@
 import sublime
 
+from .packages.typing import Any
+
 PREFERENCES_BUCKET = 'Preferences.sublime-settings'
 
 
-def get(key, default=None):
+def get(key, default: str=None) -> Any:
     """Get the value specified by key from PREFERENCES_BUCKET
     """
 
     return sublime.load_settings(PREFERENCES_BUCKET).get(key, default)
 
 
-def set(key, value):
+def set(key, value: Any) -> None:
     """Set the value specified by value into the key specified by key
     """
 
