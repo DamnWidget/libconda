@@ -34,7 +34,7 @@ class GolcondaPanel:
         self.footer = content.get('footer', '')
 
     @classmethod
-    def _load_style(cls):
+    def _load_style(cls) -> None:
         """Load CSS style
         """
 
@@ -169,13 +169,13 @@ class GolcondaPanel:
         self.panel = panel
         window.create_output_panel(self._id)
 
-    def _add_handlers(self):
+    def _add_handlers(self) -> None:
         """Add common handlers for golconda panels
         """
 
         self.add_handler('link', lambda url: webbrowser.open_new_tab(url[5:]))
 
-    def _enable_syntax_highlighter(self):
+    def _enable_syntax_highlighter(self) -> None:
         """Enable the syntax highlighter for mdpopups
         """
 
