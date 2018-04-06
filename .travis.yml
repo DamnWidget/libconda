@@ -1,0 +1,11 @@
+language: python
+
+python:
+  - "3.6"
+
+install:
+  - pip install pipenv
+  - pipenv --python 3
+  - pipenv install --dev
+
+script: pipenv run nosetests --rednose -s -w st3/libconda/tests -v
