@@ -9,6 +9,16 @@ from .packages.typing import Dict, Any, Union, List, Callable
 NavigationHandler = Dict[str, Callable]
 
 
+class UnknownHandler(RuntimeError):
+    """Fired when try to use an unknown handler
+    """
+
+
+class NoTcallableHandler(RuntimeError):
+    """Fired when the handler is not a callable object
+    """
+
+
 class GolcondaPanelTpl(Tpl):
     """Base template class for panel templates
     """
@@ -77,8 +87,8 @@ class GolcondaPanel:
         """
 
         if not callable(handler):
-            raise RuntimeError(
-                'handler {} is not callable'.format(handler.__name__)
+            raise NoTcallableHandler(
+                'handler {} is not callable'.format(handler)
             )
 
         self.navigation_handlers[url] = handler
@@ -143,14 +153,14 @@ class GolcondaPanel:
         """Sublime Text calls this method when the user clicks a link
         """
 
-        url, handler_key = url.split(':', 1)
+        handler_key, url = url.split(':', 1)
         handler = self.navigation_handlers.get(handler_key)
         if handler is None:
-            raise RuntimeError('unknown handler {}'.format(url))
+            raise UnknownHandler('unknown handler {}'.format(url))
 
         if not callable(handler):
-            raise RuntimeError(
-                'handler {} is not callable'.format(handler.__name__)
+            raise NoTcallableHandler(
+                'handler {} is not callable'.format(handler)
             )
 
         handler(url)
@@ -173,7 +183,7 @@ class GolcondaPanel:
         """Add common handlers for golconda panels
         """
 
-        self.add_handler('link', lambda url: webbrowser.open_new_tab(url[5:]))
+        self.add_handler('link', lambda url: webbrowser.open_new_tab(url))
 
     def _enable_syntax_highlighter(self) -> None:
         """Enable the syntax highlighter for mdpopups
