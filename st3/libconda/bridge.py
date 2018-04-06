@@ -13,7 +13,7 @@ REQUESTS_COUNT = Counter(
 )
 
 REQUESTS_EXCEPTIONS = Counter(
-    'golconda_tequests_exceptions', 'Number of raised exceptions on requests'
+    'golconda_requests_exceptions', 'Number of raised exceptions on requests'
 )
 
 
